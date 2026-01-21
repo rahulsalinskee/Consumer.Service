@@ -1,5 +1,7 @@
 <Solution>
-  <Folder Name="/ConsumerDatabase/" />
+  <Folder Name="/ConsumerDatabase/">
+    <Project Path="ConsumerDataBase/Consumer.DataBase/Consumer.DataBase.csproj" />
+  </Folder>
   <Folder Name="/ConsumerServices/">
     <Project Path="Consumer.Service/Consumer.Service.csproj" />
   </Folder>
