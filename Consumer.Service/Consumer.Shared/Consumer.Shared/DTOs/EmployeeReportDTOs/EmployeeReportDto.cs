@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Consumer.Shared
+namespace Consumer.Shared.DTOs.EmployeeReportDTOs
 {
-    public class EmployeeReport
+    public class EmployeeReportDto
     {
         public Guid Id { get; set; }
 
-        public Guid EmploueeId { get; set; }
+        public Guid EmployeeId { get; set; }
 
         public string FirstName { get; set; } = string.Empty;
 

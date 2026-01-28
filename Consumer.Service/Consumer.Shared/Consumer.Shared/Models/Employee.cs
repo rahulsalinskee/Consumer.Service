@@ -1,4 +1,4 @@
-﻿namespace Consumer.Shared
+﻿namespace Consumer.Shared.Models
 {
     public class Employee
     {

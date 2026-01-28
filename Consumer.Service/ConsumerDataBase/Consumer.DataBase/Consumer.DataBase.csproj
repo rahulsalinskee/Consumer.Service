@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Consumer.Shared\Consumer.Shared\Consumer.Shared.csproj" />
+    <ProjectReference Include="..\..\ConsumerException\Consumer.Exception\Consumer.Exception.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,46 @@
+[2026-01-27 20:14:45.573 +05:30] [FTL] [Consumer.Service] Host terminated unexpectedly
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: Microsoft.Extensions.Hosting.IHostedService Lifetime: Singleton ImplementationType: Consumer.Service.Worker': Unable to resolve service for type 'Consumer.Exception.GlobalException' while attempting to activate 'Consumer.Service.Worker'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: Microsoft.Extensions.Hosting.IHostedService Lifetime: Singleton ImplementationType: Consumer.Service.Worker': Unable to resolve service for type 'Consumer.Exception.GlobalException' while attempting to activate 'Consumer.Service.Worker'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'Consumer.Exception.GlobalException' while attempting to activate 'Consumer.Service.Worker'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostBuilder.InitializeServiceProvider()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at Program.<Main>$(String[] args) in G:\Code\NET_10\Kafka\ConsumerApplication\WorkerService\Consumer\Consumer.Service\Consumer.Service\Program.cs:line 16
+ 
+[2026-01-27 22:37:32.550 +05:30] [FTL] [Consumer.Service] Host terminated unexpectedly
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: Microsoft.Extensions.Hosting.IHostedService Lifetime: Singleton ImplementationType: Consumer.Service.Worker': Unable to resolve service for type 'Consumer.Exception.GlobalException' while attempting to activate 'Consumer.Service.Worker'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: Microsoft.Extensions.Hosting.IHostedService Lifetime: Singleton ImplementationType: Consumer.Service.Worker': Unable to resolve service for type 'Consumer.Exception.GlobalException' while attempting to activate 'Consumer.Service.Worker'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'Consumer.Exception.GlobalException' while attempting to activate 'Consumer.Service.Worker'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.Hosting.HostBuilder.InitializeServiceProvider()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at Program.<Main>$(String[] args) in G:\Code\NET_10\Kafka\ConsumerApplication\WorkerService\Consumer\Consumer.Service\Consumer.Service\Program.cs:line 16
+ 
+[2026-01-27 23:13:22.414 +05:30] [INF] [Consumer.Service] Application started. Press Ctrl+C to shut down.
+ 
+[2026-01-27 23:13:22.414 +05:30] [INF] [Consumer.Service] Worker started...
+ 
+[2026-01-27 23:13:22.460 +05:30] [INF] [Consumer.Service] Hosting environment: Development
+ 
+[2026-01-27 23:13:22.464 +05:30] [INF] [Consumer.Service] Content root path: G:\Code\NET_10\Kafka\ConsumerApplication\WorkerService\Consumer\Consumer.Service\Consumer.Service
+ 

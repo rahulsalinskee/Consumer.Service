@@ -1,4 +1,4 @@
-﻿using Consumer.Shared;
+﻿using Consumer.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Consumer.DataBase

@@ -1,15 +1,49 @@
 using Consumer.DataBase;
-using Consumer.Service;
+using Consumer.Exception.ExceptionRepository.ExceptionImplementations;
+using Consumer.Exception.ExceptionRepository.ExceptionServices;
+using Consumer.Log;
+using Consumer.Repositories.Repositories.Implementations;
+using Consumer.Repositories.Repositories.Services;
+using Consumer.Service; // Namespace for Worker
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
-var builder = Host.CreateApplicationBuilder(args);
+/* 1. Setup Serilog first */
+Log.Logger = LogConfiguration.GenerateConsumerLog();
 
-builder.Services.AddDbContext<EmployeeReportDbContext>(option =>
+try
 {
-    option.UseSqlServer(builder.Configuration.GetConnectionString(name: "ConnectionStringForDb_EmployeeApplication"));
-});
+    var host = Host.CreateDefaultBuilder(args).UseSerilog().ConfigureServices((hostContext, services) =>
+        {
+            var configuration = hostContext.Configuration;
 
-builder.Services.AddHostedService<Worker>();
+            /*  2. Add DbContext */
+            services.AddDbContext<EmployeeReportDbContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("ConnectionStringForDb_EmployeeApplication")));
 
-var host = builder.Build();
-host.Run();
+            /*  3. Register Repositories & Services (Scoped) */
+            services.AddScoped<IEmployeeReporterService, EmployeeReporterServiceImplementation>();
+            services.AddScoped<IEmployeeService, EmployeeServiceImplementation>();
+
+            /*  4. Register Exception Helper (Singleton or Scoped are both fine, Scoped is safer) */
+            services.AddScoped<IExceptionService, ExceptionImplementation>();
+
+            /*  5. Register the GlobalException class (Add this line!)
+                We use AddSingleton because Worker is a Singleton and GlobalException is stateless */
+            services.AddSingleton<Consumer.Exception.GlobalException>();
+
+            /*  6. Register the Worker (Hosted Service) */
+            services.AddHostedService<Worker>();
+        })
+        .Build();
+
+    await host.RunAsync();
+}
+catch (System.Exception ex)
+{
+    Log.Fatal(ex, "Host terminated unexpectedly");
+}
+finally
+{
+    Log.CloseAndFlush();
+}

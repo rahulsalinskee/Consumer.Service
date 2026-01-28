@@ -1,6 +1,15 @@
 <Solution>
+  <Folder Name="/ConsumeException/">
+    <Project Path="ConsumerException/Consumer.Exception/Consumer.Exception.csproj" Id="a66feae5-1b6c-4cf0-a496-f718e43003e1" />
+  </Folder>
   <Folder Name="/ConsumerDatabase/">
     <Project Path="ConsumerDataBase/Consumer.DataBase/Consumer.DataBase.csproj" />
+  </Folder>
+  <Folder Name="/ConsumerLogs/">
+    <Project Path="ConsumerLog/Consumer.Log/Consumer.Log.csproj" Id="1fc5f389-2230-4022-a53d-752582ccdc56" />
+  </Folder>
+  <Folder Name="/ConsumerRepositories/">
+    <Project Path="ConsumerRepositories/Consumer.Repositories/Consumer.Repositories.csproj" />
   </Folder>
   <Folder Name="/ConsumerServices/">
     <Project Path="Consumer.Service/Consumer.Service.csproj" />

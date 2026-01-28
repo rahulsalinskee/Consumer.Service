@@ -17,6 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ConsumerDataBase\Consumer.DataBase\Consumer.DataBase.csproj" />
+    <ProjectReference Include="..\ConsumerRepositories\Consumer.Repositories\Consumer.Repositories.csproj" />
   </ItemGroup>
 </Project>

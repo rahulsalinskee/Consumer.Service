@@ -361,3 +361,14 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# -------------------------------------------------------------------------
+# Custom Exceptions
+# -------------------------------------------------------------------------
+
+# Un-ignore the project directory "Consumer.Log" 
+# (It was being caught by the *.log rule above)
+!Consumer.Log/
+
+# Note: We use !Consumer.Log/ (with the trailing slash) to tell Git 
+# "This is a folder, please look inside it".

@@ -1,43 +1,96 @@
 using Confluent.Kafka;
-using Consumer.Shared;
+using Consumer.Exception;
+using Consumer.Exception.ExceptionRepository.ExceptionServices;
+using Consumer.Repositories.Repositories.Services;
+using Consumer.Shared.DTOs.EmployeeDTOs;
 using System.Text.Json;
 
 namespace Consumer.Service
 {
-    public class Worker(ILogger<Worker> logger) : BackgroundService
+    public class Worker : BackgroundService
     {
+        private readonly ILogger<Worker> _logger;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly ConsumerConfig _consumerConfig;
+
+        public Worker(ILogger<Worker> logger, IServiceProvider serviceProvider, GlobalException globalException)
+        {
+            _logger = logger;
+            _serviceProvider = serviceProvider;
+
+            _consumerConfig = new ConsumerConfig
+            {
+                BootstrapServers = "localhost:9092",
+                ClientId = "consumer-client",
+                GroupId = "employee-consumer-group",
+                /* This means earliest message will be consumed/read. 
+                *  Just like : If Someone joins any existing WhastApp group and cannot see the previous messages sent by the first person
+                *  This line will make sure that the person who joins the group in the last will also see the previous messages
+                */
+                AutoOffsetReset = AutoOffsetReset.Earliest,
+                EnableAutoCommit = false // We will commit manually after success
+            };
+        }
+
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            while (!stoppingToken.IsCancellationRequested)
+            _logger.LogInformation("Worker started...");
+
+            using var consumer = new ConsumerBuilder<string, string>(_consumerConfig).Build();
+
+            /* Subscribe to multiple topics */
+            consumer.Subscribe(new[] { "add-employee-topic", "update-employee-topic", "delete-employee-topic" });
+
+            try
             {
-                ConsumerConfig consumerConfiguration = new()
+                while (!stoppingToken.IsCancellationRequested)
                 {
-                    BootstrapServers = "localhost:9092",
-                    ClientId = "consumer-client",
-                    GroupId = "employee-consumer-group"
-                };
-
-                using (IConsumer<string, string> consumer = new ConsumerBuilder<string, string>(consumerConfiguration).Build())
-                {
-                    consumer.Subscribe(topic: "add-employee-topic");
-                    consumer.Subscribe(topic: "update-employee-topic");
-                    consumer.Subscribe(topic: "delete-employee-topic");
-
-                    /* Get the data from Apache Kafka in every 3 seconds */
-                    var consumerData = consumer.Consume(TimeSpan.FromSeconds(3));
-
-                    if (consumerData is not null)
+                    try
                     {
-                        /* Insert the data into the database */
-                        var employee = JsonSerializer.Deserialize<Employee>(consumerData.Message.Value);
+                        var result = consumer.Consume(TimeSpan.FromSeconds(3));
+
+                        if (result != null)
+                        {
+                            // Create a SCOPE for this specific message processing
+                            using (var scope = _serviceProvider.CreateScope())
+                            {
+                                // Get services from the fresh scope
+                                var service = scope.ServiceProvider.GetRequiredService<IEmployeeService>();
+                                var exceptionHelper = scope.ServiceProvider.GetRequiredService<IExceptionService>();
+
+                                await exceptionHelper.ExecuteSafeAsync(async () =>
+                                {
+                                    var messageValue = result.Message.Value;
+                                    var topic = result.Topic;
+
+                                    _logger.LogInformation("Received message on {Topic}", topic);
+
+                                    var employeeDto = JsonSerializer.Deserialize<EmployeeDto>(messageValue);
+
+                                    if (employeeDto != null)
+                                    {
+                                        string action = topic.Contains("add") ? "ADD" : "UPDATE";
+                                        await service.ProcessEmployeeAsync(employeeDto, action);
+
+                                        // Commit offset only on success
+                                        consumer.Commit(result);
+                                    }
+                                });
+                            }
+                        }
                     }
-                };
-                if (logger.IsEnabled(LogLevel.Information))
-                {
-                    logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+                    catch (ConsumeException e)
+                    {
+                        _logger.LogError("Kafka error: {Reason}", e.Error.Reason);
+                    }
                 }
-                await Task.Delay(1000, stoppingToken);
+            }
+            catch (OperationCanceledException)
+            {
+                _logger.LogInformation("Worker stopping...");
+                consumer.Close();
             }
         }
     }
 }
+
