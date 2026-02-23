@@ -18,8 +18,7 @@ try
             var configuration = hostContext.Configuration;
 
             /*  2. Add DbContext */
-            services.AddDbContext<EmployeeReportDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("ConnectionStringForDb_EmployeeApplication")));
+            services.AddDbContext<EmployeeReportDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("ConnectionStringForDb_EmployeeApplication")));
 
             /*  3. Register Repositories & Services (Scoped) */
             services.AddScoped<IEmployeeReporterService, EmployeeReporterServiceImplementation>();

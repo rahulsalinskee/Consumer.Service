@@ -19,7 +19,7 @@ namespace Consumer.Repositories.Repositories.Implementations
 
         public async Task<ResponseDto> AddEmployeeReportAsync(AddEmployeeReportDto addEmployeeReportDto)
         {
-            await this._employeeReportDbContext.
+            //await this._employeeReportDbContext.
 
             if (addEmployeeReportDto is null)
             {
@@ -59,7 +59,7 @@ namespace Consumer.Repositories.Repositories.Implementations
 
             EmployeeReportDto employeeReportDto = new()
             {
-                FirstName = addEmployeeReportDto.LastName,
+                FirstName = addEmployeeReportDto.FirstName,
                 LastName = addEmployeeReportDto.LastName,
             };
 

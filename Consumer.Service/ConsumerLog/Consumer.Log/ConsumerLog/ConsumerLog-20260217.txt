@@ -1,0 +1,24 @@
+[2026-02-17 17:40:51.374 +05:30] [INF] [Consumer.Service] Application started. Press Ctrl+C to shut down.
+ 
+[2026-02-17 17:40:51.374 +05:30] [INF] [Consumer.Service] Worker started...
+ 
+[2026-02-17 17:40:51.445 +05:30] [INF] [Consumer.Service] Hosting environment: Development
+ 
+[2026-02-17 17:40:51.448 +05:30] [INF] [Consumer.Service] Content root path: G:\Code\NET_10\Kafka\ConsumerApplication\WorkerService\Consumer\Consumer.Service\Consumer.Service
+ 
+[2026-02-17 17:49:51.001 +05:30] [INF] [Consumer.Service] Worker started...
+ 
+[2026-02-17 17:49:51.001 +05:30] [INF] [Consumer.Service] Application started. Press Ctrl+C to shut down.
+ 
+[2026-02-17 17:49:51.055 +05:30] [INF] [Consumer.Service] Hosting environment: Development
+ 
+[2026-02-17 17:49:51.060 +05:30] [INF] [Consumer.Service] Content root path: G:\Code\NET_10\Kafka\ConsumerApplication\WorkerService\Consumer\Consumer.Service\Consumer.Service
+ 
+[2026-02-17 21:15:27.302 +05:30] [INF] [Consumer.Service] Worker started...
+ 
+[2026-02-17 21:15:27.302 +05:30] [INF] [Consumer.Service] Application started. Press Ctrl+C to shut down.
+ 
+[2026-02-17 21:15:27.355 +05:30] [INF] [Consumer.Service] Hosting environment: Development
+ 
+[2026-02-17 21:15:27.359 +05:30] [INF] [Consumer.Service] Content root path: G:\Code\NET_10\Kafka\ConsumerApplication\WorkerService\Consumer\Consumer.Service\Consumer.Service
+ 
