@@ -1,0 +1,8 @@
+[2026-02-24 10:39:55.014 +05:30] [INF] [Consumer.Service] Application started. Press Ctrl+C to shut down.
+ 
+[2026-02-24 10:39:55.014 +05:30] [INF] [Consumer.Service] Worker started...
+ 
+[2026-02-24 10:39:55.066 +05:30] [INF] [Consumer.Service] Hosting environment: Development
+ 
+[2026-02-24 10:39:55.070 +05:30] [INF] [Consumer.Service] Content root path: G:\Code\NET_10\Kafka\ConsumerApplication\WorkerService\Consumer\Consumer.Service\Consumer.Service
+ 

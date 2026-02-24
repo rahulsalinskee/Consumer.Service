@@ -8,13 +8,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.1.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="DataBaseContext\" />
-    <Folder Include="Repositories\Implementations\" />
-    <Folder Include="Repositories\Services\" />
+    <ProjectReference Include="..\..\ConsumerDataBase\Consumer.DataBase\Consumer.DataBase.csproj" />
   </ItemGroup>
 
 </Project>

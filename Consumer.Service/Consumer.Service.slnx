@@ -14,7 +14,6 @@
   <Folder Name="/ConsumerRepositories/">
     <Project Path="ConsumerRepositories/Consumer.Repositories/Consumer.Repositories.csproj" />
   </Folder>
-  <Folder Name="/ConsumerService/" />
   <Folder Name="/ConsumerServices/">
     <Project Path="Consumer.Service/Consumer.Service.csproj" />
   </Folder>
